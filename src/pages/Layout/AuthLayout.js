@@ -3,8 +3,8 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Login from "../Login/Login";
 import Logo from "../../assets/logo.png";
+import { Tab, Tabs } from "@mui/material";
 import "./AuthLayout.css";
-import { Tab, Tabs, Typography } from "@mui/material";
 import Register from "../Register/Register";
 
 const AuthLayout = () => {
@@ -37,7 +37,7 @@ const AuthLayout = () => {
                 </Tabs>
               </Box>
             </Box>
-            {value === "one" ? <Login value={value} /> :<Register/>}
+            {value === "one" ? <Login value={value} /> :<Register  value={value} />}
           </Box>
         </Grid>
       </Grid>

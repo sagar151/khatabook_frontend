@@ -1,7 +1,87 @@
 .main{
     max-height: 83.5vh;
     width: 100%;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
 }
 .title{
     margin: 40px 0 35px 0;
+}
+
+.btn-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.google-btn{
+    height: 50px;
+    width: 80%;
+    text-transform: none !important;
+    font-weight: bold !important;
+    border: none !important;
+    color:  rgb(148, 144, 144) !important;
+    box-shadow: rgba(0, 0, 0, 0.22) 0 0 10px 0px;
+    margin-bottom: 30px !important;
+}
+
+.box-main{
+    width: 80%;
+    color:rgb(148, 144, 144);
+}
+
+.box-content {
+    position: relative;
+    font-size: 30px;
+    z-index: 1;
+    overflow: hidden;
+    text-align: center;
+}
+.box-content:before, .box-content:after {
+    position: absolute;
+    top: 51%;
+    overflow: hidden;
+    width: 45%;
+    height: 2px;
+    content: '\a0';
+    background-color: rgb(163, 160, 160);
+}
+
+.box-content:before {
+    margin-left: -50%;
+    text-align: right;
+}
+
+.box-content:after {
+    width: 45%;
+    left:60%;
+    text-align: right;
+}
+
+.login-form{
+    margin:30px auto 30px auto;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input{
+    width: 320px;
+    margin:10px auto !important;
+    color:rgb(148, 144, 144);
+}
+
+.action-btn{
+    display: flex;
+    width: 320px;
+}
+.action-btn button{
+    margin-right:10px;
+    height: 40px;
+    width: 140px;
+    font-weight: bold;
+    text-transform: none;
 }
