@@ -1,17 +1,24 @@
+import React, { useEffect } from "react";
 import { Box, Button, Typography } from "@mui/material";
-import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Loader from "../../components/Loader";
 import "./Redirect.css";
+import { LocalStorageSet } from "../../utils/localstorage";
 
 const Redirect = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   // eslint-disable-next-line no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    const response = LocalStorageSet(searchParams.get("token"));
+    if (response) navigate("/dashboard");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams.get("token")]);
   return (
     <Box className="main-redirect">
       <Loader />
-      { searchParams.get("token") ? (
+      {searchParams.get("token") ? (
         <Box>
           <Typography
             variant="h4"
@@ -42,7 +49,11 @@ const Redirect = () => {
           >
             Something went to wrong,please try again!
           </Typography>
-          <Button className="back-btn" variant="contained" onClick={()=>navigate('/')}>
+          <Button
+            className="back-btn"
+            variant="contained"
+            onClick={() => navigate("/")}
+          >
             Go back
           </Button>
         </Box>

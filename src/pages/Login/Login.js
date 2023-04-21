@@ -23,7 +23,7 @@ const Login = () => {
         </Typography>
       </Box>
       <Box className="btn-container">
-        <GoogleLogin />
+        <GoogleLogin text="Sign in with Google"/>
         <Box className="box-main">
           <Typography className="box-content">OR</Typography>
         </Box>

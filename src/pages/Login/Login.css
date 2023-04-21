@@ -68,6 +68,18 @@
     align-items: center;
 }
 
+.login-form .error::after{
+    margin-top: 20px;
+}
+
+
+.login-form .error{
+    display: flex;
+    justify-content: start;
+    color:red;
+    font-size: 0.7rem;
+}
+
 .input{
     width: 320px;
     margin:10px auto !important;
