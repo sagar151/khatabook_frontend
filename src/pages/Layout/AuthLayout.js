@@ -13,7 +13,6 @@ const AuthLayout = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log('value',value)
   return (
     <Box className="main">
       <Grid container className="grid-container">

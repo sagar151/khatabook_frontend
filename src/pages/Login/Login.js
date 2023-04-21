@@ -1,8 +1,8 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import "./Login.css";
 import { Button, Checkbox, TextField, Typography } from "@mui/material";
-import GoogleIcon from "@mui/icons-material/Google";
+import "./Login.css";
+import GoogleLogin from "../../components/GoogleLogin";
 
 const Login = () => {
   return (
@@ -23,13 +23,7 @@ const Login = () => {
         </Typography>
       </Box>
       <Box className="btn-container">
-        <Button
-          variant="outlined"
-          startIcon={<GoogleIcon style={{ color: "#1976d2" }} />}
-          className="google-btn"
-        >
-          Sign in with Google
-        </Button>
+        <GoogleLogin />
         <Box className="box-main">
           <Typography className="box-content">OR</Typography>
         </Box>
@@ -48,12 +42,20 @@ const Login = () => {
           type="password"
           autoComplete="current-password"
         />
-        <Box sx={{ display: "flex", alignItems: 'center', width: "340px", mb: 5 }}>
-          <Checkbox defaultChecked size="small" sx={{ color: "rgb(148, 144, 144)"}}  />
-          <Typography sx={{color:  "rgb(148, 144, 144)"  }}>Remember me.</Typography>
+        <Box
+          sx={{ display: "flex", alignItems: "center", width: "340px", mb: 5 }}
+        >
+          <Checkbox
+            defaultChecked
+            size="small"
+            sx={{ color: "rgb(148, 144, 144)" }}
+          />
+          <Typography sx={{ color: "rgb(148, 144, 144)" }}>
+            Remember me.
+          </Typography>
         </Box>
         <Box className="action-btn">
-          <Button variant="contained">Signin</Button>
+          <Button variant="contained">Sign in</Button>
           <Button variant="text">Forgot Password</Button>
         </Box>
       </Box>

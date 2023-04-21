@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Button, TextField, Typography } from '@mui/material'
-import GoogleIcon from "@mui/icons-material/Google";
+import GoogleLogin from '../../components/GoogleLogin';
 import './Register.css'
 
 const Register = () => {
@@ -15,13 +15,7 @@ const Register = () => {
         </Typography>
       </Box>
        <Box className="btn-container">
-        <Button
-          variant="outlined"
-          startIcon={<GoogleIcon style={{ color: "#1976d2" }} />}
-          className="google-btn"
-        >
-          Sign up with Google
-        </Button>
+        <GoogleLogin/>
         <Box className="box-main">
           <Typography className="box-content">OR</Typography>
         </Box>
@@ -68,8 +62,7 @@ const Register = () => {
           autoComplete="current-password"
         />
         <Box className="action-btn-register">
-          <Button variant="contained">Signin</Button>
-          <Button variant="text">Forgot Password</Button>
+          <Button variant="contained">Sign up</Button>
         </Box>
       </Box>
     </Box>
