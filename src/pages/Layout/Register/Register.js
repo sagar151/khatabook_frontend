@@ -1,13 +1,13 @@
 import React from "react";
-import { Box, Button, TextField, Typography } from "@mui/material";
-import GoogleLogin from "../../components/GoogleLogin";
-import "./Register.css";
-import { Formik } from "formik";
-import { SignupSchema } from "../../utils/FormikSchema/SignupSchema";
-import { AuthAPI } from "../../api/AuthAPI";
-import { LocalStorageSet } from "../../utils/localstorage";
-import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import { Formik } from "formik";
+import GoogleLogin from "../../../components/GoogleLogin";
+import { SignupSchema } from "../../../utils/FormikSchema/SignupSchema";
+import { AuthAPI } from "../../../api/AuthAPI";
+import { LocalStorageSet } from "../../../utils/localstorage";
+import { useNavigate } from "react-router";
+import "./Register.css";
 
 const Register = () => {
   const navigate = useNavigate();

@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthLayout from "../pages/Layout/AuthLayout";
-import Redirect from "../pages/Redirect/Redirect";
+import Redirect from "../pages/Layout/Redirect/Redirect";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import { AuthContext } from "../context";
 

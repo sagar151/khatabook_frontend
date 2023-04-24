@@ -1,11 +1,11 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Login from "../Login/Login";
-import Logo from "../../assets/logo.png";
 import { Tab, Tabs } from "@mui/material";
+import Login from "./Login/Login";
+import Logo from "../../assets/logo.png";
+import Register from "./Register/Register";
 import "./AuthLayout.css";
-import Register from "../Register/Register";
 
 const AuthLayout = () => {
   const [value, setValue] = React.useState("one");

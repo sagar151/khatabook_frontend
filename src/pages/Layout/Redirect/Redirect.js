@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import Loader from "../../components/Loader";
+import Loader from "../../../components/Loader";
+import { LocalStorageSet } from "../../../utils/localstorage";
+import { AuthContext } from "../../../context";
 import "./Redirect.css";
-import { LocalStorageSet } from "../../utils/localstorage";
-import { AuthContext } from "../../context";
 
 const Redirect = () => {
   const navigate = useNavigate();

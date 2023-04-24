@@ -1,16 +1,15 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import { Button, Checkbox, TextField, Typography } from "@mui/material";
-import GoogleLogin from "../../components/GoogleLogin";
-import { toast } from "react-toastify";
-import { AuthAPI } from "../../api/AuthAPI";
-import { Formik } from "formik";
-import { LoginSchema } from "../../utils/FormikSchema/LoginSchema ";
-import "./Login.css";
-import { LocalStorageSet } from "../../utils/localstorage";
-import { useNavigate } from "react-router";
 import { useState } from "react";
-import { ForgotPWDSchema } from "../../utils/FormikSchema/ForgotPWDSchema ";
+import { Formik } from "formik";
+import { useNavigate } from "react-router";
+import { Button, Box, Checkbox, TextField, Typography } from "@mui/material";
+import GoogleLogin from "../../../components/GoogleLogin";
+import { toast } from "react-toastify";
+import { AuthAPI } from "../../../api/AuthAPI";
+import { LoginSchema } from "../../../utils/FormikSchema/LoginSchema ";
+import { LocalStorageSet } from "../../../utils/localstorage";
+import { ForgotPWDSchema } from "../../../utils/FormikSchema/ForgotPWDSchema ";
+import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
