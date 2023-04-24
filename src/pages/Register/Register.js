@@ -4,8 +4,13 @@ import GoogleLogin from "../../components/GoogleLogin";
 import "./Register.css";
 import { Formik } from "formik";
 import { SignupSchema } from "../../utils/FormikSchema/SignupSchema";
+import { AuthAPI } from "../../api/AuthAPI";
+import { LocalStorageSet } from "../../utils/localstorage";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const Register = () => {
+  const navigate = useNavigate();
   return (
     <Box className="main">
       <Box className="title-register">
@@ -34,12 +39,36 @@ const Register = () => {
         validationSchema={SignupSchema}
         onSubmit={async (values) => {
           try {
-            console.log("values is here--------------->", values);
+            const payload = {
+              email: values.email,
+              password: values.password,
+              firstname: values.firstName,
+              lastname: values.lastName,
+              mobileno: values.mobileno,
+            };
+            const response = await AuthAPI("/signup", {
+              method: "POST",
+              data: payload,
+            });
+            if (response.status === true) {
+              await LocalStorageSet("token", response.token);
+              toast.success("Sucessfully Sign up", { autoClose: 5000 });
+              navigate("/dashboard");
+            } else if (response.status === 422) {
+              const errorMessage =
+                response.data.message.errors.email ??
+                "User exists already, please login instead.";
+              toast.error(errorMessage, { autoClose: 5000 });
+            } else {
+              toast.error("Something went to wrong,please try again!", {
+                autoClose: 5000,
+              });
+            }
           } catch (error) {
-            console.log(
-              "errorsssssssssssssssss---------------------------->",
-              error
-            );
+            toast.error("Something went to wrong,please try again!", {
+              autoClose: 5000,
+            });
+            console.log(error);
           }
         }}
       >
@@ -103,11 +132,13 @@ const Register = () => {
                 value={values.confirmPassword}
                 onChange={handleChange}
               />
-              <Typography className="error" >
+              <Typography className="error">
                 {errors.confirmPassword}
               </Typography>
               <Box className="action-btn-register">
-                <Button type="submit" variant="contained">Sign up</Button>
+                <Button type="submit" variant="contained">
+                  Sign up
+                </Button>
               </Box>
             </Box>
           </form>

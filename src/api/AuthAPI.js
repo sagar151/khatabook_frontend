@@ -8,7 +8,6 @@ export const AuthAPI = async (url, option = {}) => {
       ...option,
     };
     const response = await axios(`${baseURL}${url}`, newOption);
-    console.log('response is here------------>',response)
     return response.data;
   } catch (error) {
     return error.response;

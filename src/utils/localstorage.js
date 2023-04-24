@@ -1,6 +1,6 @@
-export const LocalStorageSet = (token) => {
-  if (token) {
-    localStorage.setItem("token", token);
+export const LocalStorageSet = ( name,token) => {
+  if (token && name) {
+    localStorage.setItem(name, token);
     return true;
   } else {
     return false;

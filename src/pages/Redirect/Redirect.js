@@ -1,18 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Loader from "../../components/Loader";
 import "./Redirect.css";
 import { LocalStorageSet } from "../../utils/localstorage";
+import { AuthContext } from "../../context";
 
 const Redirect = () => {
   const navigate = useNavigate();
   // eslint-disable-next-line no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const authContext = useContext(AuthContext);
   useEffect(() => {
-    const response = LocalStorageSet(searchParams.get("token"));
-    if (response) navigate("/dashboard");
+    const response = LocalStorageSet("token", searchParams.get("token"));
+    if (response) {
+      authContext.login();
+      navigate("/dashboard");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams.get("token")]);
   return (
