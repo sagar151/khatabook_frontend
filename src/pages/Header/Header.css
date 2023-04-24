@@ -1,0 +1,49 @@
+.header-main {
+  height: 80px;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-logo img {
+  height: 80px;
+}
+
+.header-logo svg {
+  height: 80px;
+  width: 25px;
+  color: #1976d2;
+  cursor: pointer;
+}
+
+.header-setting {
+  height: 50px;
+  width: 90px;
+  margin: auto 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-setting-icon {
+  width: 53px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.header-setting svg {
+  height: 40px;
+  width: fit-content;
+  color: #1976d2;
+}
+
+.header-sidebar-icon {
+  display: flex;
+}

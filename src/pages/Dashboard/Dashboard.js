@@ -1,16 +1,10 @@
-import React, { useState } from 'react'
-import { Button } from '@mui/material'
-import { useNavigate } from 'react-router'
+import React from "react";
+import { Box } from "@mui/material";
+import "./Dashboard.css";
+import Header from "../Header/Header";
 
 const Dashboard = () => {
-  const [first, setfirst] = useState('')
-  const navigate=useNavigate()
-  return (
-    <Button onClick={() => {
-      setfirst('frmoo')
-      navigate('/test')
-    }}>Check my button</Button>
-  )
-}
+  return <Header />;
+};
 
-export default Dashboard
+export default Dashboard;
