@@ -1,0 +1,12 @@
+.main-dashboard{
+    width: 100vw;
+    max-height: 100%;
+    background-color: white;
+}
+
+.paper-container{
+    margin: 15px;
+    padding: 20px;
+    box-sizing: border-box;
+    height: calc(100vh - 110px);
+}

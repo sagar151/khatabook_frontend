@@ -87,7 +87,7 @@
 
 .login-form .error{
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     color:red;
     font-size: 0.7rem;
 }

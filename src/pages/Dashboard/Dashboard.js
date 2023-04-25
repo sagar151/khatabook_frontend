@@ -1,10 +1,9 @@
-import React from "react";
-import { Box } from "@mui/material";
-import "./Dashboard.css";
-import Header from "../Header/Header";
+import React from 'react'
 
 const Dashboard = () => {
-  return <Header />;
-};
+  return (
+    <div>Dashboard is mine</div>
+  )
+}
 
-export default Dashboard;
+export default Dashboard
