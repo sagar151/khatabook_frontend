@@ -1,9 +1,27 @@
-import React from 'react'
+import { Box, Button } from "@mui/material";
+import React from "react";
+import AddDialog from "../../components/AddDialog/AddDialog";
 
 const Dashboard = () => {
-  return (
-    <div>Dashboard is mine</div>
-  )
-}
+  const [open, setOpen] = React.useState(false);
 
-export default Dashboard
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  return (
+    <>
+      <Box>
+        <Button variant="contained" onClick={handleClickOpen}>
+          Add Entry
+        </Button>
+      </Box>
+      <AddDialog open={open} handleClose={handleClose} />
+    </>
+  );
+};
+
+export default Dashboard;

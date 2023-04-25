@@ -1,0 +1,17 @@
+.dialog-container {
+  margin: 10px 10px;
+}
+
+.dialog-container .MuiTextField-root {
+  width: 45%;
+  margin-bottom: 25px ;
+}
+
+.MuiFormControl-root {
+  margin-left: 0px !important;
+   margin-bottom: 25px !important;
+}
+
+.MuiFormControlLabel-root {
+    margin:0px 5px !important
+}
