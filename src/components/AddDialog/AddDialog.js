@@ -22,8 +22,16 @@ import UPI from "../../mock/UPI.json";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { AddRecordSchema } from "../../utils/FormikSchema/AddRecordSchema";
 import "./AddDialog.css";
+import { useDispatch, useSelector } from "react-redux";
+import { createBorrower } from "../../redux/slices/borrowerSlice";
 
 const AddDialog = ({ open, handleClose }) => {
+  const dispatch = useDispatch();
+  const { data, loading, error } = useSelector((state) => state.borrowers);
+  // useEffect(() => {
+  //    dispatch(getBorrower());
+  // }, [dispatch]);
+
   return (
     <Dialog
       maxWidth="lg"
@@ -52,6 +60,7 @@ const AddDialog = ({ open, handleClose }) => {
         validationSchema={AddRecordSchema}
         onSubmit={(values) => {
           try {
+            dispatch(createBorrower(values));
             console.log("values is here---------------------->", values);
           } catch (error) {
             console.log("error is here---------------------->", error);
