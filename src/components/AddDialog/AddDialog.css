@@ -3,15 +3,33 @@
 }
 
 .dialog-container .MuiTextField-root {
-  width: 45%;
-  margin-bottom: 25px ;
+  width: 90%;
+  /* margin-bottom: 25px ; */
 }
 
-.MuiFormControl-root {
+.dialog-container.MuiFormControl-root {
   margin-left: 0px !important;
-   margin-bottom: 25px !important;
+   margin-bottom: 5px !important;
 }
 
-.MuiFormControlLabel-root {
+.dialog-container .MuiFormControlLabel-root {
     margin:0px 5px !important
+}
+
+.input-error-block{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+  padding: 0px;
+}
+
+.dialog-container .MuiTypography-root{
+  margin: 17px 0px;
+}
+
+.input-error-block p,.error{
+  color: red;
+  font-size: 15px;
+  font-weight: 300;
 }
