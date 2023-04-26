@@ -33,3 +33,15 @@
   font-size: 15px;
   font-weight: 300;
 }
+
+.dialog-footer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:20px
+}
+
+.dialog-footer button{
+  width: 15%;
+}

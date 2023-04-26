@@ -7,6 +7,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Divider,
   FormControl,
   FormControlLabel,
   MenuItem,
@@ -23,7 +24,6 @@ import { AddRecordSchema } from "../../utils/FormikSchema/AddRecordSchema";
 import "./AddDialog.css";
 
 const AddDialog = ({ open, handleClose }) => {
-
   return (
     <Dialog
       maxWidth="lg"
@@ -267,13 +267,16 @@ const AddDialog = ({ open, handleClose }) => {
                   </Box>
                 </Box>
               </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose} variant="outlined">
-                  Cancel
-                </Button>
-                <Button type="submit" variant="contained">
-                  Save
-                </Button>
+              <Divider />
+              <DialogActions sx={{ height: "50px" }}>
+                <Box className="dialog-footer">
+                  <Button onClick={handleClose} variant="outlined">
+                    Cancel
+                  </Button>
+                  <Button type="submit" variant="contained">
+                    Save
+                  </Button>
+                </Box>
               </DialogActions>
             </form>
           );
