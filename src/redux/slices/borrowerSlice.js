@@ -2,21 +2,20 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { API } from "../../api/AuthAPI";
 
 export const createBorrower = createAsyncThunk(
-  "borrower/createBorrower",
-  async (payload,{dispatch, getState, rejectWithValue, fulfillWithValue}) => {
+  "borrower/list",
+  async (payload, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const response = await API("/create/borrower", {
-        method: "POST",
-        data: payload,
+      const response = await API("/borrower/list", {
+        method: "GET",
+        params: payload,
       });
-      console.log("response is here--------------->", response);
-      return response;
+      if (response.status === true) {
+        return fulfillWithValue(response);
+      } else {
+        return rejectWithValue(response.data);
+      }
     } catch (error) {
-      console.log(
-        "error is hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-        error
-      );
-      return error;
+      return rejectWithValue(error);
     }
   }
 );
@@ -24,27 +23,30 @@ export const createBorrower = createAsyncThunk(
 export const borrowerSlice = createSlice({
   name: "users",
   initialState: {
-    data: {},
-    loading: "idle",
+    data: [],
+    total:0,
+    loading: false,
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(createBorrower.pending, (state, action) => {
-      if (state.loading === "idle") {
-        state.loading = "pending";
+      if (state.loading === false) {
+        state.loading = true;
       }
     });
     builder.addCase(createBorrower.fulfilled, (state, action) => {
-      if (state.loading === "pending") {
-        state.data = action.payload;
-        state.loading = "idle";
+      if (state.loading === true) {
+        console.log('action.payload',action.payload)
+        state.data = [...action.payload.Debtor];
+        state.total=action.payload.total
+        state.loading = false;
       }
     });
     builder.addCase(createBorrower.rejected, (state, action) => {
-      if (state.loading === "pending") {
-        state.loading = "idle";
-        state.error = "Error occured";
+      if (state.loading === true) {
+        state.loading = false;
+        state.error = action.payload;
       }
     });
   },

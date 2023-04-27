@@ -1,0 +1,10 @@
+.table-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.action-table{
+    display: flex;
+    justify-content: space-between;
+}

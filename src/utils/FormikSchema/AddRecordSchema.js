@@ -2,7 +2,7 @@ import moment from "moment";
 import * as Yup from "yup";
 
 const phoneRegExp =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+  /^[6-9]\d{9}$/gi;
 
 export const AddRecordSchema = Yup.object().shape({
   debtorName: Yup.string().min(3, "Too Short!").required("Required"),
@@ -11,6 +11,7 @@ export const AddRecordSchema = Yup.object().shape({
     .required("Please Enter Mobile Number")
     .matches(phoneRegExp, "Mobile number is not valid"),
   paymentMode: Yup.string().required("Payment mode is required."),
+  type: Yup.string().required("Type is required."),
   payDate: Yup.date()
     .nullable()
     .required("Pay Date is required")

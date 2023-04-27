@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemText,
-  Paper,
-} from "@mui/material";
+import { Box, List, ListItem, ListItemText, Paper } from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
 import Header from "../Header/Header";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -109,6 +103,7 @@ const MainLayout = () => {
             ? `${drawerWidth}px`
             : `calc(${theme.spacing(7)} + 10px)`,
         }}
+        className="main-layout"
       >
         <Paper className="paper-container">
           <Outlet />

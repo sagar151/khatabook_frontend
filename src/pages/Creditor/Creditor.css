@@ -1,0 +1,17 @@
+.credit-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title{
+    color: rgb(148, 144, 144);
+    font-family: 'Frank Ruhl Libre';
+    font-weight: bold !important;
+    padding: 1rem;
+}
+
+.add-btn{
+    height: 10%;
+    width: 10%;
+}

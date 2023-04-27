@@ -21,23 +21,19 @@ import NetBanking from "../../mock/NetBanking.json";
 import UPI from "../../mock/UPI.json";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { AddRecordSchema } from "../../utils/FormikSchema/AddRecordSchema";
+import { toast } from "react-toastify";
+import { API } from "../../api/AuthAPI";
 import "./AddDialog.css";
-import { useDispatch, useSelector } from "react-redux";
 import { createBorrower } from "../../redux/slices/borrowerSlice";
+import { useDispatch } from "react-redux";
 
-const AddDialog = ({ open, handleClose }) => {
+const AddDialog = ({ open, handleClose, type = "CREDIT" }) => {
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.borrowers);
-  // useEffect(() => {
-  //    dispatch(getBorrower());
-  // }, [dispatch]);
-
   return (
     <Dialog
       maxWidth="lg"
       fullWidth={true}
       open={open}
-      onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
@@ -56,14 +52,37 @@ const AddDialog = ({ open, handleClose }) => {
           paymentApplication: "",
           isInterest: false,
           isWhatsapp: false,
+          type: "",
         }}
         validationSchema={AddRecordSchema}
-        onSubmit={(values) => {
+        onSubmit={async (values) => {
           try {
-            dispatch(createBorrower(values));
-            console.log("values is here---------------------->", values);
+            const response = await API("/create/borrower", {
+              method: "POST",
+              data: values,
+            });
+            if (response.status === true) {
+              toast.success(
+                response.message ?? "Successfully created new entry."
+              );
+              const payload = {
+                pageNum: 0,
+                pageSize: 10,
+                type,
+              };
+              dispatch(createBorrower(payload));
+              handleClose();
+            }
+            if (!response.status) {
+              toast.error(response?.message);
+            }
+
+            if (response.status === 400) {
+              const keys = Object.keys(response.data.message.errors);
+              toast.error(response.data.message.errors[keys[0]]);
+            }
           } catch (error) {
-            console.log("error is here---------------------->", error);
+            toast.error("Create Debtor Entry Failed, please try again later.");
           }
         }}
       >
@@ -154,6 +173,28 @@ const AddDialog = ({ open, handleClose }) => {
                         </>
                       )}
                     </Box>
+                  </Box>
+                  <Box
+                    sx={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <Box className="input-error-block">
+                      <TextField
+                        select
+                        id="type"
+                        name="type"
+                        value={values.type}
+                        label="Type"
+                        onChange={handleChange}
+                      >
+                        {["DEBT", "CREDIT"].map((item, index) => (
+                          <MenuItem value={item} key={index}>
+                            {item}
+                          </MenuItem>
+                        ))}
+                      </TextField>
+                      <Typography>{errors.type}</Typography>
+                    </Box>
+                    <Box className="input-error-block"></Box>
                   </Box>
                   <Box
                     sx={{ display: "flex", justifyContent: "space-between" }}
