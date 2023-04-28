@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
@@ -13,12 +14,13 @@ import { visuallyHidden } from "@mui/utils";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createBorrower } from "../../redux/slices/borrowerSlice";
-import { Chip, Tooltip, Typography } from "@mui/material";
+import { Chip, Tooltip } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
 import moment from "moment";
 import "./TableView.css";
 import UpdateDialog from "../UpdateDialog/UpdateDialog";
+import DeleteDialog from "../DeleteDialog/DeleteDialog";
 
 const headCells = [
   {
@@ -78,10 +80,10 @@ const headCells = [
     sortable: false,
   },
   {
-    id: "debtorNumber",
+    id: "contactNumber",
     numeric: true,
     disablePadding: false,
-    label: "Debtor Number",
+    label: "Contact Number",
     sortable: false,
   },
   {
@@ -154,9 +156,11 @@ const TableView = ({ type }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [row, setRow] = useState([]);
-  const [record, setRecord] = useState(null);
 
+  const [record, setRecord] = useState(null);
   const [open, setOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [deleteRecord, setdeleteRecord] = useState(null);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -164,16 +168,13 @@ const TableView = ({ type }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setRecord(null);
   };
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
-  };
-
-  const handleClick = (event, name) => {
-    console.log("event--------------name", event, name);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -197,14 +198,11 @@ const TableView = ({ type }) => {
     dispatch(createBorrower(payload));
   }, [page, rowsPerPage, order, orderBy]);
 
-  const { data, total, error, loading } = useSelector(
-    (state) => state.borrowers
-  );
+  const { data, total, loading } = useSelector((state) => state.borrowers);
   useEffect(() => {
     setRow(data);
   }, [loading]);
 
-  console.log("data", record);
   return (
     <>
       <Box sx={{ width: "100%" }}>
@@ -225,7 +223,6 @@ const TableView = ({ type }) => {
                   row.map((item, index) => (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
                       role="checkbox"
                       tabIndex={-1}
                       key={index}
@@ -305,19 +302,23 @@ const TableView = ({ type }) => {
                         </Box>
                       </TableCell>
                       <TableCell align="center">
-                        <Box className="table-row">
-                          <Box sx={{ mb: 0.5 }}>{item.debtorNumber}</Box>
-                          {item.isWhatsapp && (
-                            <Tooltip title="Whatsapp number">
+                        <Tooltip
+                          title={`${
+                            type === "CREDIT" ? "Creditor" : "Debtor"
+                          } ${item.isWhatsapp ? "Whatsapp" : ""}  number`}
+                        >
+                          <Box className="table-row">
+                            <Box sx={{ mb: 0.5 }}> {item.contactNumber}</Box>
+                            {item.isWhatsapp && (
                               <Chip
                                 color="primary"
                                 size="small"
                                 variant="outlined"
                                 label={`WhatsApp`}
                               />
-                            </Tooltip>
-                          )}
-                        </Box>
+                            )}
+                          </Box>
+                        </Tooltip>
                       </TableCell>
                       <TableCell align="right">
                         <Chip
@@ -348,7 +349,12 @@ const TableView = ({ type }) => {
                             />
                           </Tooltip>
                           <Tooltip title={"Delete"}>
-                            <DeleteIcon />
+                            <DeleteIcon
+                              onClick={() => {
+                                setdeleteRecord(item)
+                                setDeleteOpen(true);
+                              }}
+                            />
                           </Tooltip>
                         </Box>
                       </TableCell>
@@ -380,6 +386,15 @@ const TableView = ({ type }) => {
         handleClose={handleClose}
         type={type}
         record={record}
+      />
+      <DeleteDialog
+        open={deleteOpen}
+        handleClose={() => {
+          setdeleteRecord(null)
+          setDeleteOpen(false);
+        }}
+        type={type}
+        record={deleteRecord}
       />
     </>
   );

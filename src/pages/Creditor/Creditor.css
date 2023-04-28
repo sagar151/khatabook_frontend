@@ -11,7 +11,8 @@
     padding: 1rem;
 }
 
-.add-btn{
-    height: 10%;
-    width: 10%;
+.title-right{
+    display: flex;
+    justify-content: space-between;
+    width: 25%;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   Button,
@@ -15,21 +15,20 @@ import {
   Typography,
 } from "@mui/material";
 import moment from "moment";
+import { useDispatch } from "react-redux";
 import { Formik } from "formik";
+import { toast } from "react-toastify";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import NetBanking from "../../mock/NetBanking.json";
 import UPI from "../../mock/UPI.json";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { AddRecordSchema } from "../../utils/FormikSchema/AddRecordSchema";
-import { toast } from "react-toastify";
+import { createBorrower } from "../../redux/slices/borrowerSlice";
 import { API } from "../../api/AuthAPI";
 import "./UpdateDialog.css";
-import { createBorrower } from "../../redux/slices/borrowerSlice";
-import { useDispatch } from "react-redux";
 
 const UpdateDialog = ({ open, handleClose, type = "CREDIT", record }) => {
   const dispatch = useDispatch();
-  console.log("record", record);
   return (
     record && (
       <Dialog
@@ -45,7 +44,7 @@ const UpdateDialog = ({ open, handleClose, type = "CREDIT", record }) => {
           initialValues={{
             debtorName: record.debtorName,
             creditorName: record.creditorName,
-            debtorNumber: record.debtorNumber,
+            contactNumber: record.contactNumber,
             paymentMode: record.paymentMode,
             payDate: moment(record.payDate),
             paybackDate: moment(record.paybackDate),
@@ -261,16 +260,16 @@ const UpdateDialog = ({ open, handleClose, type = "CREDIT", record }) => {
                         }}
                       >
                         <TextField
-                          id="debtorNumber"
-                          name="debtorNumber"
+                          id="contactNumber"
+                          name="contactNumber"
                           type="number"
-                          value={values.debtorNumber}
+                          value={values.contactNumber}
                           onChange={handleChange}
-                          label="WhatsApp Number"
+                          label="Contact Number"
                           variant="outlined"
                         />
                         <Typography className="error">
-                          {errors.debtorNumber}
+                          {errors.contactNumber}
                         </Typography>
                         <FormControl component="fieldset">
                           <FormControlLabel

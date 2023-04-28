@@ -43,7 +43,7 @@ const AddDialog = ({ open, handleClose, type = "CREDIT" }) => {
         initialValues={{
           debtorName: "",
           creditorName: "",
-          debtorNumber: "",
+          contactNumber: "",
           paymentMode: "",
           payDate: moment(new Date()),
           paybackDate: moment(new Date()),
@@ -255,16 +255,16 @@ const AddDialog = ({ open, handleClose, type = "CREDIT" }) => {
                       }}
                     >
                       <TextField
-                        id="debtorNumber"
-                        name="debtorNumber"
+                        id="contactNumber"
+                        name="contactNumber"
                         type="number"
-                        value={values.debtorNumber}
+                        value={values.contactNumber}
                         onChange={handleChange}
-                        label="WhatsApp Number"
+                        label="Contact Number"
                         variant="outlined"
                       />
                       <Typography className="error">
-                        {errors.debtorNumber}
+                        {errors.contactNumber}
                       </Typography>
                       <FormControl component="fieldset">
                         <FormControlLabel

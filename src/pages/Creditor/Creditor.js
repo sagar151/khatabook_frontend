@@ -1,18 +1,43 @@
-import React from "react";
-import { Box, Button, Typography } from "@mui/material";
-import "./Creditor.css";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Button,
+  InputAdornment,
+  OutlinedInput,
+  Typography,
+} from "@mui/material";
 import AddDialog from "../../components/AddDialog/AddDialog";
 import TableView from "../../components/Table/TableView";
+import { debounce } from "lodash";
+import { AiOutlineSearch } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { createBorrower } from "../../redux/slices/borrowerSlice";
+import "./Creditor.css";
 
 const Creditor = () => {
   const [open, setOpen] = React.useState(false);
+  const [search, setSearch] = useState("");
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
   };
+  const debounceOnSearchChange = debounce(handleChange, 500);
 
-  const handleClose = () => {
-    setOpen(false);
+  useEffect(() => {
+    handleSearchByAPI();
+  }, [search]);
+
+  const handleSearchByAPI = () => {
+    const payload = {
+      pageNum: 0,
+      pageSize: 10,
+      type: "CREDIT",
+      searchByDebtorName: search,
+    };
+    dispatch(createBorrower(payload));
   };
   return (
     <>
@@ -21,13 +46,34 @@ const Creditor = () => {
           <Typography className="title" variant="h3">
             CREDITOR
           </Typography>
-          <Button className="add-btn" variant="contained" onClick={handleClickOpen}>
-            Add Entry
-          </Button>
+          <Box className="title-right">
+            <OutlinedInput
+              id="search"
+              type="text"
+              name="search"
+              onBlur={(e) => handleChange(e)}
+              onChange={debounceOnSearchChange}
+              placeholder="Search by debtor's name..."
+              autoComplete="off"
+              size="small"
+              startAdornment={
+                <InputAdornment position="start">
+                  <AiOutlineSearch stroke={1.5} size="16px" />
+                </InputAdornment>
+              }
+            />
+            <Button
+              className="add-btn"
+              variant="contained"
+              onClick={() => setOpen(true)}
+            >
+              Add Entry
+            </Button>
+          </Box>
         </Box>
-        <TableView type="CREDIT"/>
+        <TableView type="CREDIT" />
       </Box>
-      <AddDialog open={open} handleClose={handleClose} type="CREDIT"/>
+      <AddDialog open={open} handleClose={() => setOpen(false)} type="CREDIT" />
     </>
   );
 };

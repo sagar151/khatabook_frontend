@@ -7,7 +7,7 @@ const phoneRegExp =
 export const AddRecordSchema = Yup.object().shape({
   debtorName: Yup.string().min(3, "Too Short!").required("Required"),
   creditorName: Yup.string().min(3, "Too Short!").required("Required"),
-  debtorNumber: Yup.string()
+  contactNumber: Yup.string()
     .required("Please Enter Mobile Number")
     .matches(phoneRegExp, "Mobile number is not valid"),
   paymentMode: Yup.string().required("Payment mode is required."),

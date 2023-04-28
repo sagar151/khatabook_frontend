@@ -1,7 +1,7 @@
 import axios from "axios";
 import { LocalStorageGet } from "../utils/localstorage";
 
-const baseURL = "http://localhost:8080/api/1/khatabook";
+const baseURL = process.env.REACT_APP_BASE_URL
 export const AuthAPI = async (url, option = {}) => {
   try {
     const newOption = {
@@ -28,7 +28,6 @@ export const API = async (url, option = {}) => {
     const response = await axios(`${baseURL}${url}`, newOption);
     return response.data;
   } catch (error) {
-    console.log('errrrrrrrrrrrrrrrrrr===============================>',error)
     return error.response;
   }
 };
