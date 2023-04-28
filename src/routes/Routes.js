@@ -22,7 +22,7 @@ const RoutesLayout = () => {
     <AuthContext.Provider value={{ login: login, logout: logout }}>
       <Router>
         <Routes>
-          <Route path="/" element={<AuthLayout />}></Route>
+          <Route exact path="/" element={<AuthLayout />}></Route>
           <Route path="/redirect" element={<Redirect />}></Route>
           <Route
             path=""
