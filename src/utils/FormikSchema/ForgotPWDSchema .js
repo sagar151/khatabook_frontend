@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as Yup from "yup";
 
 export const ForgotPWDSchema  = Yup.object().shape({
