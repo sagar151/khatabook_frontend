@@ -4,7 +4,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 
 const GoogleLogin = ({text}) => {
   const handleLoginWithGoogle = async () => {
-    window.open("http://localhost:8080/api/1/khatabook/google", "_self");
+    window.open(process.env.REACT_APP_GOOGLE_LOGIN_URL, "_self");
   };
   return (
     <Button
