@@ -17,10 +17,13 @@ import { createBorrower } from "../../redux/slices/borrowerSlice";
 import { Chip, Tooltip } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
+import PaymentsIcon from '@mui/icons-material/Payments';
 import moment from "moment";
 import "./TableView.css";
 import UpdateDialog from "../UpdateDialog/UpdateDialog";
 import DeleteDialog from "../DeleteDialog/DeleteDialog";
+import PaymentDialog from "../PaymentDialog/PaymentDialog";
+
 
 const headCells = [
   {
@@ -161,6 +164,7 @@ const TableView = ({ type }) => {
   const [open, setOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleteRecord, setdeleteRecord] = useState(null);
+  const [payment, setPayment] = useState(false)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -340,6 +344,14 @@ const TableView = ({ type }) => {
                       </TableCell>
                       <TableCell align="center">
                         <Box className="action-table">
+                           <Tooltip title={`Payment `}>
+                            <PaymentsIcon
+                              onClick={() => {
+                                setRecord(item);
+                                setPayment(true);
+                              }}
+                            />
+                          </Tooltip>
                           <Tooltip title={`Edit `}>
                             <CreateIcon
                               onClick={() => {
@@ -395,6 +407,15 @@ const TableView = ({ type }) => {
         }}
         type={type}
         record={deleteRecord}
+      />
+       <PaymentDialog
+        open={payment}
+        handleClose={() => {
+          setRecord(null)
+          setPayment(false);
+        }}
+        type={type}
+        record={record}
       />
     </>
   );
