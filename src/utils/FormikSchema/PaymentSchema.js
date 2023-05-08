@@ -2,11 +2,16 @@
 import * as Yup from "yup";
 
 export const PaymentSchema = Yup.object().shape({
-  paidAmount: Yup.string().email("Please enter valid email").required("Required"),
-  password: Yup.string()
-    .required("Please Enter Password")
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
-    ),
+  totalAmount: Yup.number(),
+  paidAmount: Yup.number()
+    .min(0, `Minimum tip is $0`)
+    .test({
+      name: 'max',
+      exclusive: false,
+      params: { },
+      message: 'Paid amount must be less than or equal of the Total amount',
+      test: function (value) {
+          return value <= parseFloat(this.parent.totalAmount)
+      },
+    }),
 });

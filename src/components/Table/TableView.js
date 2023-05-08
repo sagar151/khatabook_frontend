@@ -17,13 +17,12 @@ import { createBorrower } from "../../redux/slices/borrowerSlice";
 import { Chip, Tooltip } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
-import PaymentsIcon from '@mui/icons-material/Payments';
+import PaymentsIcon from "@mui/icons-material/Payments";
 import moment from "moment";
 import "./TableView.css";
 import UpdateDialog from "../UpdateDialog/UpdateDialog";
 import DeleteDialog from "../DeleteDialog/DeleteDialog";
 import PaymentDialog from "../PaymentDialog/PaymentDialog";
-
 
 const headCells = [
   {
@@ -73,6 +72,13 @@ const headCells = [
     numeric: true,
     disablePadding: false,
     label: "Interest",
+    sortable: false,
+  },
+  {
+    id: "paidAmount",
+    numeric: true,
+    disablePadding: false,
+    label: "Paid Amount",
     sortable: false,
   },
   {
@@ -164,7 +170,7 @@ const TableView = ({ type }) => {
   const [open, setOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleteRecord, setdeleteRecord] = useState(null);
-  const [payment, setPayment] = useState(false)
+  const [payment, setPayment] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -277,10 +283,18 @@ const TableView = ({ type }) => {
                                 color="primary"
                                 size="small"
                                 variant="outlined"
-                                label={`${item.interestRate} %`}
+                                label={`${item.interestRate} % - ${item.interestAmount}`}
                               />
                             </Tooltip>
                           )}
+                        </Box>
+                      </TableCell>
+                      <TableCell align="center">
+                        <Box className="table-row">
+                          {console.log("item.paidAmount", item.paidAmount)}
+                          <Tooltip title="Total Paid Amount as of Till Date.">
+                            <p>{item.paidAmount ?? 0}</p>
+                          </Tooltip>
                         </Box>
                       </TableCell>
                       <TableCell align="center">
@@ -291,18 +305,6 @@ const TableView = ({ type }) => {
                           >
                             <Box sx={{ mb: 0.5 }}>{item.totalAmount}</Box>
                           </Tooltip>
-                          {item.interestAmount > 0 && (
-                            <Tooltip
-                              title={`Interest Rate calculated by annum `}
-                            >
-                              <Chip
-                                color="primary"
-                                size="small"
-                                variant="outlined"
-                                label={`${item.interestAmount} `}
-                              />
-                            </Tooltip>
-                          )}
                         </Box>
                       </TableCell>
                       <TableCell align="center">
@@ -326,10 +328,22 @@ const TableView = ({ type }) => {
                       </TableCell>
                       <TableCell align="right">
                         <Chip
-                          color={item.isPaid ? "success" : "warning"}
+                          color={
+                            item.isPaid
+                              ? "success"
+                              : item.isInstallment
+                              ? "secondary"
+                              : "warning"
+                          }
                           size="small"
                           variant="outlined"
-                          label={item.isPaid ? "Yes" : "No"}
+                          label={
+                            item.isPaid
+                              ? "Yes"
+                              : item.isInstallment
+                              ? "Installment"
+                              : "No"
+                          }
                         />
                       </TableCell>
                       <TableCell align="right">
@@ -344,14 +358,16 @@ const TableView = ({ type }) => {
                       </TableCell>
                       <TableCell align="center">
                         <Box className="action-table">
-                           <Tooltip title={`Payment `}>
-                            <PaymentsIcon
-                              onClick={() => {
-                                setRecord(item);
-                                setPayment(true);
-                              }}
-                            />
-                          </Tooltip>
+                          {!item.isPaid && (
+                            <Tooltip title={`Payment `}>
+                              <PaymentsIcon
+                                onClick={() => {
+                                  setRecord(item);
+                                  setPayment(true);
+                                }}
+                              />
+                            </Tooltip>
+                          )}
                           <Tooltip title={`Edit `}>
                             <CreateIcon
                               onClick={() => {
@@ -363,7 +379,7 @@ const TableView = ({ type }) => {
                           <Tooltip title={"Delete"}>
                             <DeleteIcon
                               onClick={() => {
-                                setdeleteRecord(item)
+                                setdeleteRecord(item);
                                 setDeleteOpen(true);
                               }}
                             />
@@ -402,16 +418,16 @@ const TableView = ({ type }) => {
       <DeleteDialog
         open={deleteOpen}
         handleClose={() => {
-          setdeleteRecord(null)
+          setdeleteRecord(null);
           setDeleteOpen(false);
         }}
         type={type}
         record={deleteRecord}
       />
-       <PaymentDialog
+      <PaymentDialog
         open={payment}
         handleClose={() => {
-          setRecord(null)
+          setRecord(null);
           setPayment(false);
         }}
         type={type}

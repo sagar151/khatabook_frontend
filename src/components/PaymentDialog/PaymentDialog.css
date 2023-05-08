@@ -1,0 +1,9 @@
+.input-error-block{
+    padding-bottom:1.5rem ;
+}
+
+.input-error-block p{
+  color: red;
+  font-size: 15px;
+  font-weight: 300;
+}
