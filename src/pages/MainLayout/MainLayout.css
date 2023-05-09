@@ -1,17 +1,18 @@
-.main-dashboard{
-    width: 100vw;
-    max-height: 100%;
-    background-color: white;
+.main-dashboard {
+  width: 100vw;
+  max-height: 100%;
+  background-color: white;
 }
 
-.paper-container{
-    margin: 15px;
-    padding: 20px;
-    box-sizing: border-box;
-    min-height: calc(100vh - 110px);
+.paper-container {
+  margin: 15px;
+  padding: 20px;
+  box-sizing: border-box;
+  min-height: calc(100vh - 110px);
+  background-color: hsl(0, 0%, 90%) !important;
+  box-shadow: none !important;
 }
-
-.main-layout{
-   overflow: overlay;
-    height: calc(100vh - 80px);
+.main-layout {
+  overflow: overlay;
+  height: calc(100vh - 80px);
 }

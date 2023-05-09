@@ -11,12 +11,14 @@ import Creditor from "../pages/Creditor/Creditor";
 import Debtor from "../pages/Debtor/Debtor";
 
 const RoutesLayout = () => {
+
   const [isAuthenticated, setAuthenticated] = useState(
     () => localStorage.getItem("token") !== null
   );
 
   const login = () => setAuthenticated(true);
   const logout = () => setAuthenticated(false);
+
 
   return (
     <AuthContext.Provider value={{ login: login, logout: logout }}>

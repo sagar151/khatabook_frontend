@@ -1,0 +1,20 @@
+.second-layout {
+  max-height: 100%;
+  display: flex;
+  margin: 1rem 1rem 1rem 0;
+}
+
+.chart-dashboard {
+  /* margin: 1rem 1rem 1rem 0; */
+  width: 100%;
+  min-height: 100%;
+  background-color: white;
+}
+
+.dashboard-right{
+    margin-left: 1.8rem;
+}
+
+/* .btn-add{
+    width: 15rem !important;
+} */
