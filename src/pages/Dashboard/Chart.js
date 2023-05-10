@@ -1,11 +1,11 @@
 const getDauChartData = (keys, values) => {
-  console.log("keys, values", keys, values);
+  // console.log("keys, values", keys, values);
   return {
-    height: 350,
+    height: 400,
     type: "bar",
     options: {
       chart: {
-        id: "bar-chart",
+        id: "basic-bar",
         stacked: true,
         toolbar: {
           show: true,
@@ -17,7 +17,7 @@ const getDauChartData = (keys, values) => {
           enabled: true,
         },
       },
-      colors: ["#4527a0"],
+      colors: ["#4527a0", "#d84315", "#808080", "#FFBD00"],
       responsive: [
         {
           breakpoint: 480,
@@ -39,6 +39,23 @@ const getDauChartData = (keys, values) => {
       xaxis: {
         type: "category",
         categories: keys,
+      },
+      yaxis: {
+        labels: {
+          show: true,
+          formatter: (value) => {
+            return value;
+          },
+        },
+      },
+      tooltip: {
+        y: {
+          title: {
+            formatter: function (seriesName) {
+              return "";
+            },
+          },
+        },
       },
       legend: {
         show: true,
@@ -80,8 +97,12 @@ const getDauChartData = (keys, values) => {
     },
     series: [
       {
-        name: "Active Users",
-        data: values,
+        name: "Credit",
+        data: values.isCredit,
+      },
+      {
+        name: "Debt",
+        data: values.isDebt,
       },
     ],
   };

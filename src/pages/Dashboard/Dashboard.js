@@ -36,7 +36,7 @@ const Dashboard = () => {
     };
     const payloadChart = {
       start: "2023-05-08",
-      end: "2023-05-10",
+      end: "2023-05-11",
     };
     dispatch(getDebtState(payloadDebt));
     dispatch(getCreditState(payloadCredit));
@@ -49,17 +49,53 @@ const Dashboard = () => {
   const { chart, loading: chartLoading } = useSelector((state) => state.chart);
 
   useEffect(() => {
-    chart.map((chartData) => chartData.type.map((data)=>setchartKeys(data)));
+    const totalTypes = chart.reduce((prev, curr) => {
+      const isTypes = [];
+      curr.type.length && curr.type.map((data) => isTypes.push(data));
+      return (prev = isTypes.length ? [...isTypes, ...prev] : []);
+    }, []);
+
+    const sortData = totalTypes.sort(function (a, b) {
+      return new Date(a._id) - new Date(b._id);
+    });
+    setchartKeys([...sortData]);
   }, [chart]);
 
-  console.log("chart,chartLoading", chart, chartKeys);
+  // console.log("chartKeys,chartLoading,chartKeys,chartKeys", chart, chartKeys);
 
-  const DashboardChart = getDashboardChart(
-    chart.filter((data) => data.type.filter((d) => d.date)),
-    chart.map((data) => data.type.filter((d) => d.totalAmount))
+  const date = chartKeys.length
+    ? chart
+        .map((data) => data._id)
+      .sort(function (a, b) {
+          console.log('a---------------------------b',a,b)
+          return new Date(a) - new Date(b);
+        })
+    : [];
+
+  const isCredit = chartKeys.length
+    ? chartKeys
+        .sort(function (a, b) {
+          return new Date(a.date) - new Date(b.date);
+        })
+        .map((data) => (data.type === "CREDIT" ? data.totalAmount : 0))
+    : [];
+
+  const isDebt = chartKeys.length
+    ? chartKeys
+        .sort(function (a, b) {
+          return new Date(a.date) - new Date(b.date);
+        })
+        .map((data) => (data.type === "DEBT" ? data.totalAmount : 0))
+    : [];
+
+  console.log(
+    "isCredit===================================>",
+    date,
+    chart,
+    chartKeys
   );
+  const DashboardChart = getDashboardChart(date, { isCredit, isDebt });
 
-  // console.log("  chart.map((data) => data.type.filter((d) => d.date)),",  chart.filter((data) => data.type.filter((d) => d.date)),)
   return (
     <>
       {!loading && !creditLoading && !chartLoading ? (
