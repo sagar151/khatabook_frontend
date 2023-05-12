@@ -1,7 +1,6 @@
-const getDauChartData = (keys, values) => {
-  // console.log("keys, values", keys, values);
-  return {
-    height: 400,
+const getDauChartData = (keys, values) => ({
+
+    height: 500,
     type: "bar",
     options: {
       chart: {
@@ -17,7 +16,7 @@ const getDauChartData = (keys, values) => {
           enabled: true,
         },
       },
-      colors: ["#4527a0", "#d84315", "#808080", "#FFBD00"],
+      colors: ["#1b5e20", "#d32f2f", "#808080", "#FFBD00"],
       responsive: [
         {
           breakpoint: 480,
@@ -44,7 +43,7 @@ const getDauChartData = (keys, values) => {
         labels: {
           show: true,
           formatter: (value) => {
-            return value;
+            return value.toFixed(2);
           },
         },
       },
@@ -98,14 +97,13 @@ const getDauChartData = (keys, values) => {
     series: [
       {
         name: "Credit",
-        data: values.isCredit,
+        data: values.credit,
       },
       {
         name: "Debt",
-        data: values.isDebt,
+        data: values.debt,
       },
     ],
-  };
-};
-
+  }
+)
 export default getDauChartData;

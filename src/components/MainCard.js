@@ -33,7 +33,7 @@ const MainCard = React.forwardRef(
       title,
       ...others
     },
-    ref = Ref
+    ref
   ) => {
     const theme = useTheme();
 
