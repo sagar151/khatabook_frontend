@@ -217,7 +217,7 @@ const AddDialog = ({ open, handleClose, type = "CREDIT" }) => {
                     <Box className="input-error-block">
                       <LocalizationProvider dateAdapter={AdapterMoment}>
                         <DatePicker
-                          label="Pay Back Date"
+                          label="Pay Back/Receive Date"
                           value={values.paybackDate}
                           onChange={(value) =>
                             setFieldValue(

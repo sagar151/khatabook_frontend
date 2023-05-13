@@ -119,7 +119,7 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const { order, orderBy, onRequestSort } = props;
+  const { order, orderBy, onRequestSort, type } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -140,7 +140,11 @@ function EnhancedTableHead(props) {
                 direction={orderBy === headCell.id ? order : "asc"}
                 onClick={createSortHandler(headCell.id)}
               >
-                {headCell.label}
+                {type === "CREDIT"
+                  ? headCell.label === "Pay back date"
+                    ? "Receive date"
+                    : headCell.label
+                  : headCell.label}
                 {orderBy === headCell.id ? (
                   <Box component="span" sx={visuallyHidden}>
                     {order === "desc"
@@ -226,6 +230,7 @@ const TableView = ({ type }) => {
               <EnhancedTableHead
                 order={order}
                 orderBy={orderBy}
+                type={type}
                 onRequestSort={handleRequestSort}
               />
               <TableBody>
