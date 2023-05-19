@@ -2,22 +2,17 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import moment from "moment";
-import {
-  Box,
-  Button,
-  Grid,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid, Paper, Typography } from "@mui/material";
 import AddDialog from "../../components/AddDialog/AddDialog";
 import { useDispatch, useSelector } from "react-redux";
 import { getDebtState } from "../../redux/slices/debtStateSlice";
 import { getCreditState } from "../../redux/slices/creditState";
 import TotalIncomeDarkCard from "../../components/TotalIncomeDarkCard";
 import TotalIncomeLightCard from "../../components/TotalIncomeLightCard";
-import getDashboardChart from "./Chart";
 import DatePicker from "../../components/DatePicker/DatePicker";
 import { getChartData } from "../../redux/slices/chartSlice";
+import { getProfileState } from "../../redux/slices/profileSlice";
+import getDashboardChart from "./Chart";
 import Card from "./Card";
 import "./Dashboard.css";
 
@@ -56,6 +51,7 @@ const Dashboard = () => {
 
     dispatch(getDebtState(payloadDebt));
     dispatch(getCreditState(payloadCredit));
+    dispatch(getProfileState());
   }, []);
 
   useEffect(() => {

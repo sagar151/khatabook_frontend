@@ -33,7 +33,7 @@ const RoutesLayout = () => {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="creditor" element={<Creditor />} />
             <Route path="debtor" element={<Debtor />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="profile/:id" element={<Profile />} />
           </Route>
         </Routes>
       </Router>

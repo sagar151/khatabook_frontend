@@ -16,3 +16,10 @@
   overflow: overlay;
   height: calc(100vh - 80px);
 }
+
+@media screen and (max-width: 480px) {
+  .paper-container {
+     margin: 5px;
+     padding: 10px;
+  }
+}

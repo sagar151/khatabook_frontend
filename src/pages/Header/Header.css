@@ -22,13 +22,23 @@
   color: #1976d2;
   cursor: pointer;
 }
+.header-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+}
+
+.header-right h6 {
+  font-weight: bolder;
+}
 
 .header-setting {
   height: 50px;
   width: 90px;
-  margin: auto 10px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .header-setting-icon {
@@ -38,8 +48,12 @@
   border-radius: 50%;
 }
 
+.pop-item {
+  cursor: pointer;
+}
+
 .header-setting svg {
-  height: 40px;
+  height: 30px;
   width: fit-content;
   color: #1976d2;
 }

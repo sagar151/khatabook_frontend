@@ -1,0 +1,11 @@
+.input-profile {
+  width: 320px;
+  margin: 10px auto !important;
+  color: rgb(148, 144, 144);
+}
+@media screen and (max-width: 480px) {
+  .main-grid .input-profile {
+    height: 5rem !important;
+    width:13rem !important;
+  }
+}
