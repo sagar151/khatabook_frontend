@@ -30,7 +30,7 @@ const Login = () => {
               variant="subtitle1"
               sx={{ textAlign: "center", color: "rgb(148, 144, 144)" }}
             >
-              Welcome to Mate Family.Please Login with your personal account
+              Welcome to Khatabook, Please Login with your personal account
               information letter.
             </Typography>
           </Box>

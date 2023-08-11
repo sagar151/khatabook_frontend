@@ -1,7 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { Tab, Tabs } from "@mui/material";
+import {Button, Tab, Tabs} from "@mui/material";
 import Login from "./Login/Login";
 import Logo from "../../assets/logo.png";
 import Register from "./Register/Register";
@@ -20,7 +20,9 @@ const AuthLayout = () => {
         <Grid item xs={4}>
           <Box className="action-container">
             <Box className="logo-block">
+              {/*<Button>*/}
               <img src={Logo} alt="logo" className="logo" />
+              {/*</Button>*/}
             </Box>
             <Box >
               <Box sx={{ width: "100%" }}>

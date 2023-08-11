@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { Box, Divider, Popover, Typography } from "@mui/material";
 import Logo from "../../assets/logo.png";
 import { FiSettings } from "react-icons/fi";
-import { GoThreeBars } from "react-icons/go";
+// import { GoThreeBars } from "react-icons/go";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import "./Header.css";
 
@@ -32,7 +32,8 @@ const Header = ({ open, onOpen, onClose }) => {
           {open ? (
             <ChevronLeftIcon onClick={onClose} />
           ) : (
-            <GoThreeBars onClick={onOpen} />
+              <></>
+            // <GoThreeBars onClick={onOpen} />
           )}
         </Box>
         <Box className="header-right">
@@ -50,14 +51,14 @@ const Header = ({ open, onOpen, onClose }) => {
                   horizontal: "left",
                 }}
               >
-                <Typography
-                  className="pop-item"
-                  sx={{ p: 2 }}
-                  onClick={() => navigate(`/profile/:${profileState?._id}`)}
-                >
-                  Profile
-                </Typography>
-                <Divider />
+                {/*<Typography*/}
+                {/*  className="pop-item"*/}
+                {/*  sx={{ p: 2 }}*/}
+                {/*  onClick={() => navigate(`/profile/:${profileState?._id}`)}*/}
+                {/*>*/}
+                {/*  Profile*/}
+                {/*</Typography>*/}
+                {/*<Divider />*/}
                 <Typography className="pop-item" sx={{ p: 2 }}>
                   Logout
                 </Typography>

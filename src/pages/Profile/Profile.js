@@ -8,7 +8,7 @@ import "./Profile.css"
 const Profile = () => {
   return (
     <Paper>
-      <Box>
+        <Box sx={{ display: "flex",justifyContent: "center",margin:5}}>
         <Typography variant="h4"> Profile Page </Typography>
       </Box>
       <Formik
@@ -127,7 +127,7 @@ const Profile = () => {
               <Typography className="error">
                 {errors.confirmPassword}
               </Typography>
-              <Box className="action-btn-register">
+              <Box sx={{ display: "flex",justifyContent: "center",marginBottom:5,marginTop:5}}>
                 <Button type="submit" variant="contained">
                   Sign up
                 </Button>
